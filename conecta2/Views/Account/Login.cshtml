@@ -1,0 +1,42 @@
+﻿@using conecta2.Models
+@model conecta2.Models.LoginViewModel
+
+@{
+    Layout = "LayoutLogin";
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+<body class="bg-light" style="height: 100vh;">
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <form asp-action="Login" method="post" class="border rounded shadow-sm p-4 bg-white shadow" style="max-width: 400px; width: 100%;">
+            <div class="mb-4 text-center">
+                <i class="bi bi-alexa" style="font-size: 3rem; color: #007bff;"></i> <!-- Ícono en la parte superior -->
+                <h2 class="fw-bold">Iniciar Sesión</h2>
+            </div>
+
+            <!-- Campo para el Usuario -->
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input asp-for="Username" class="form-control" placeholder="Ingresa tu usuario" />
+                    <label asp-for="Username">Usuario</label>
+                </div>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <!-- Campo para la Contraseña -->
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Ingresa tu contraseña" />
+                    <label asp-for="Password">Contraseña</label>
+                </div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <!-- Botón de enviar -->
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg">Ingresar</button>
+            </div>
+        </form>
+    </div>
+</body>
+

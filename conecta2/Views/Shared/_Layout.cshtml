@@ -1,0 +1,50 @@
+﻿@{
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - conecta2</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <header class="bg-light p-3 mb-4 border-bottom d-flex justify-content-between align-items-center">
+        <span class="text-muted">Hola, @User.Identity.Name</span>
+        <h4 class="mb-0">Conecta2</h4>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Footer con la navbar -->
+    <footer class="mt-auto">
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-top box-shadow">
+            <div class="container-fluid d-flex justify-content-center">
+                <!-- Contenido de la navbar siempre visible -->
+                <div class="d-sm-inline-flex justify-content-center align-items-center">
+                    <ul class="navbar-nav">
+                        <li class="nav-item mx-3 d-flex flex-column align-items-center">
+                            <a class="nav-link text-dark d-flex flex-column align-items-center" asp-area="">
+                                <i class="bi bi-house-heart" style="font-size: 1.5rem;"></i> <!-- Ícono con tamaño ajustado -->
+                                <span class="mt-1 small">Mis Dispositivos</span> <!-- Texto debajo del ícono -->
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

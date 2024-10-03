@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\marlo\\OneDrive\\Documents\\Universidad\\WEB\\conecta2\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A332711F-568A-43BB-AAA5-96EDECD403FC}|conecta2\\conecta2.csproj|c:\\users\\marlo\\onedrive\\documents\\universidad\\web\\conecta2\\conecta2\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A332711F-568A-43BB-AAA5-96EDECD403FC}|conecta2\\conecta2.csproj|solutionrelative:conecta2\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A332711F-568A-43BB-AAA5-96EDECD403FC}|conecta2\\conecta2.csproj|c:\\users\\marlo\\onedrive\\documents\\universidad\\web\\conecta2\\conecta2\\controllers\\dispositivoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A332711F-568A-43BB-AAA5-96EDECD403FC}|conecta2\\conecta2.csproj|solutionrelative:conecta2\\controllers\\dispositivoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -46,11 +50,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\marlo\\OneDrive\\Documents\\Universidad\\WEB\\conecta2\\conecta2\\Dockerfile",
+              "RelativeDocumentMoniker": "conecta2\\Dockerfile",
+              "ToolTip": "C:\\Users\\marlo\\OneDrive\\Documents\\Universidad\\WEB\\conecta2\\conecta2\\Dockerfile",
+              "RelativeToolTip": "conecta2\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-09-22T20:22:00.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\marlo\\OneDrive\\Documents\\Universidad\\WEB\\conecta2\\conecta2\\Program.cs",
               "RelativeDocumentMoniker": "conecta2\\Program.cs",
@@ -58,12 +75,11 @@
               "RelativeToolTip": "conecta2\\Program.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAgwCwAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-22T19:55:24.143Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-22T19:55:24.143Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "DispositivosController.cs",
               "DocumentMoniker": "C:\\Users\\marlo\\OneDrive\\Documents\\Universidad\\WEB\\conecta2\\conecta2\\Controllers\\DispositivosController.cs",
               "RelativeDocumentMoniker": "conecta2\\Controllers\\DispositivosController.cs",
@@ -71,25 +87,23 @@
               "RelativeToolTip": "conecta2\\Controllers\\DispositivosController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-22T19:48:04.739Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-22T19:48:04.739Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Dispositivos.cshtml",
               "DocumentMoniker": "C:\\Users\\marlo\\OneDrive\\Documents\\Universidad\\WEB\\conecta2\\conecta2\\Views\\Dispositivos\\Dispositivos.cshtml",
               "RelativeDocumentMoniker": "conecta2\\Views\\Dispositivos\\Dispositivos.cshtml",
-              "ToolTip": "C:\\Users\\marlo\\OneDrive\\Documents\\Universidad\\WEB\\conecta2\\conecta2\\Views\\Dispositivos\\Dispositivos.cshtml*",
-              "RelativeToolTip": "conecta2\\Views\\Dispositivos\\Dispositivos.cshtml*",
+              "ToolTip": "C:\\Users\\marlo\\OneDrive\\Documents\\Universidad\\WEB\\conecta2\\conecta2\\Views\\Dispositivos\\Dispositivos.cshtml",
+              "RelativeToolTip": "conecta2\\Views\\Dispositivos\\Dispositivos.cshtml",
               "ViewState": "AgIAABsAAAAAAAAAAAAUwCkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-22T19:46:48.496Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-22T19:46:48.496Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "LayoutLogin.cshtml",
               "DocumentMoniker": "C:\\Users\\marlo\\OneDrive\\Documents\\Universidad\\WEB\\conecta2\\conecta2\\Views\\Shared\\LayoutLogin.cshtml",
               "RelativeDocumentMoniker": "conecta2\\Views\\Shared\\LayoutLogin.cshtml",
@@ -97,12 +111,11 @@
               "RelativeToolTip": "conecta2\\Views\\Shared\\LayoutLogin.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-22T19:02:40.223Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-22T19:02:40.223Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "homePage.cshtml",
               "DocumentMoniker": "C:\\Users\\marlo\\OneDrive\\Documents\\Universidad\\WEB\\conecta2\\conecta2\\Views\\Home\\homePage.cshtml",
               "RelativeDocumentMoniker": "conecta2\\Views\\Home\\homePage.cshtml",
@@ -110,12 +123,11 @@
               "RelativeToolTip": "conecta2\\Views\\Home\\homePage.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-21T21:36:43.318Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-21T21:36:43.318Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\marlo\\OneDrive\\Documents\\Universidad\\WEB\\conecta2\\conecta2\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "conecta2\\Controllers\\HomeController.cs",
@@ -123,12 +135,11 @@
               "RelativeToolTip": "conecta2\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T21:35:17.652Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-21T21:35:17.652Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\marlo\\OneDrive\\Documents\\Universidad\\WEB\\conecta2\\conecta2\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "conecta2\\Views\\Shared\\_Layout.cshtml",
@@ -136,12 +147,11 @@
               "RelativeToolTip": "conecta2\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAACIAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-21T21:10:36.384Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-21T21:10:36.384Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Login.cshtml",
               "DocumentMoniker": "C:\\Users\\marlo\\OneDrive\\Documents\\Universidad\\WEB\\conecta2\\conecta2\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "conecta2\\Views\\Account\\Login.cshtml",
@@ -149,12 +159,11 @@
               "RelativeToolTip": "conecta2\\Views\\Account\\Login.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-21T20:50:44.543Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-21T20:50:44.543Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "AccountController.cs",
               "DocumentMoniker": "C:\\Users\\marlo\\OneDrive\\Documents\\Universidad\\WEB\\conecta2\\conecta2\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "conecta2\\Controllers\\AccountController.cs",
@@ -162,8 +171,7 @@
               "RelativeToolTip": "conecta2\\Controllers\\AccountController.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAqwBcAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-21T20:42:10.555Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-21T20:42:10.555Z"
             }
           ]
         }

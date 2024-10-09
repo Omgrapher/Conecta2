@@ -10,25 +10,28 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(options =>
     {
         options.LoginPath = "/Account/Login"; // Ruta de inicio de sesión.
+        options.AccessDeniedPath = "/Account/Login";
     });
+
+
 
 var app = builder.Build();
 
-// Configurar el middleware de autenticación y autorización.
-app.UseAuthentication(); // Habilita la autenticación
-app.UseAuthorization();
+ 
 
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
-
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRouting();
+app.UseRouting(); 
+
+// Configurar el middleware de autenticación y autorización.
+app.UseAuthentication(); // Habilita la autenticación
+app.UseAuthorization(); // Habilita la autorización
 
 app.UseEndpoints(endpoints =>
 {

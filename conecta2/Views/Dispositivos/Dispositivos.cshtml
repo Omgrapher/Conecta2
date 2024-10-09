@@ -3,58 +3,134 @@
     ViewData["Title"] = "Mis Iconos";
 }
 
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Primer Circuito</h2>
+<div class="container mt-5 shadow-sm p-3 rounded"">
     <div class="row justify-content-center">
-        <!-- Card 1 -->
-        <div class="col-md-4">
-            <div class="card text-center border border-danger shadow-danger" style="cursor: pointer;" onclick="toggleFoco(false)">
+        <h2 class="text-center mb-4">Primer Dispositivo</h2>
+        <div class="col-md-3">
+            <div class="card text-center border border-danger shadow-danger" style="cursor: pointer;" onclick="toggleFoco(1, false)">
                 <div class="card-body">
                     <i class="bi bi-plug" style="font-size: 4rem;"></i>
-                    <h5 class="card-title mt-3">Plug</h5>
+                    <h5 class="card-title mt-3">Apagado</h5>
                 </div>
             </div>
         </div>
-
-        <!-- Card 2 -->
-        <div class="col-md-4">
-            <div class="card text-center border" style="cursor: pointer;" onclick="toggleFoco(true)">
+        <div class="col-md-3">
+            <div class="card text-center border" style="cursor: pointer;" onclick="toggleFoco(1, true)">
                 <div class="card-body">
                     <i class="bi bi-plug-fill" style="font-size: 4rem;"></i>
-                    <h5 class="card-title mt-3">Plug Fill</h5>
+                    <h5 class="card-title mt-3">Encendido</h5>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<div class="container mt-5 shadow-sm p-3 rounded">
+    <div class="row justify-content-center">
+        <h2 class="text-center mb-4">Segundo Dispositivo</h2>
+        <div class="col-md-3">
+            <div class="card text-center border border-danger shadow-danger" style="cursor: pointer;" onclick="toggleFoco(2, false)">
+                <div class="card-body">
+                    <i class="bi bi-plug" style="font-size: 4rem;"></i>
+                    <h5 class="card-title mt-3">Apagado</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center border" style="cursor: pointer;" onclick="toggleFoco(2, true)">
+                <div class="card-body">
+                    <i class="bi bi-plug-fill" style="font-size: 4rem;"></i>
+                    <h5 class="card-title mt-3">Encendido</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 shadow-sm p-3 rounded">
+    <div class="row justify-content-center">
+        <h2 class="text-center mb-4">Tercer Dispositivo</h2>
+        <div class="col-md-3">
+            <div class="card text-center border border-danger shadow-danger" style="cursor: pointer;" onclick="toggleFoco(3, false)">
+                <div class="card-body">
+                    <i class="bi bi-plug" style="font-size: 4rem;"></i>
+                    <h5 class="card-title mt-3">Apagado</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center border" style="cursor: pointer;" onclick="toggleFoco(3, true)">
+                <div class="card-body">
+                    <i class="bi bi-plug-fill" style="font-size: 4rem;"></i>
+                    <h5 class="card-title mt-3">Encendido</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 shadow-sm p-3 rounded">
+    <div class="row justify-content-center">
+        <h2 class="text-center mb-4">Cuarto Dispositivo</h2>
+        <div class="col-md-3">
+            <div class="card text-center border border-danger shadow-danger" style="cursor: pointer;" onclick="toggleFoco(4, false)">
+                <div class="card-body">
+                    <i class="bi bi-plug" style="font-size: 4rem;"></i>
+                    <h5 class="card-title mt-3">Apagado</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-center border" style="cursor: pointer;" onclick="toggleFoco(4, true)">
+                <div class="card-body">
+                    <i class="bi bi-plug-fill" style="font-size: 4rem;"></i>
+                    <h5 class="card-title mt-3">Encendido</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script>
-    function toggleFoco(encender) {
+    function toggleFoco(circuito, encender) {
         $.ajax({
             type: "POST",
             url: '@Url.Action("ToggleFoco", "Dispositivos")',
-            data: { encender: encender },
+            data: { circuito: circuito, encender: encender },
             success: function (response) {
                 alert(response.message); // Muestra el mensaje del servidor
-                changeBorder(encender); // Cambia el borde según el estado
+                changeBorder(circuito, encender); // Cambia el borde según el estado
             }
         });
     }
 
-    function changeBorder(encender) {
+    function changeBorder(circuito, encender) {
         const cards = document.querySelectorAll('.card');
-        cards.forEach(c => {
-            c.classList.remove('border-success', 'shadow-success', 'border-danger', 'shadow-danger'); // Resetea estilos
-            if (encender) {
-                c.classList.add('border-success', 'shadow-success'); // Agrega estilos verdes si se enciende
-            } else {
-                c.classList.add('border-danger', 'shadow-danger'); // Agrega estilos rojos si se apaga
+        cards.forEach((c, index) => {
+            if (index === (circuito - 1) * 2 || index === (circuito - 1) * 2 + 1) {
+                c.classList.remove('border-success', 'shadow-success', 'border-danger', 'shadow-danger');
+                if (encender) {
+                    c.classList.add('border-success', 'shadow-success'); // Encendido
+                } else {
+                    c.classList.add('border-danger', 'shadow-danger');   // Apagado
+                }
             }
         });
     }
 </script>
 
 <style>
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* Asegura que el contenedor ocupe el 100% de la altura */
+    }
+
+    .content {
+        flex: 1; /* Este contendrá el contenido principal y se expandirá */
+    }
+
     .card {
         transition: border-color 0.3s, box-shadow 0.3s;
     }

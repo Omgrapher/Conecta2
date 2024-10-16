@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using conecta2.Util;
+using System.Reflection.Metadata;
 
 namespace conecta2.Controllers
 {
@@ -41,13 +43,28 @@ namespace conecta2.Controllers
                     // Firmar al usuario (crea la cookie de autenticación)
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties).Wait();
 
-                    TempData["SuccessMessage"] = "Inicio de sesión exitoso!";
 
-                    return RedirectToAction("homePage", "Home");
+                    // Generar la URL de redirección
+                    string redirectUrl = Url.Action("HomePage", "Home");
+
+                    string swalScript = Swal.Fire("Inicio de Sesión Correcto", "Bienvenido",SwalIcon.Success,redirectUrl);
+
+                    ViewBag.SwalScript = swalScript;
+
+                    return View();
+
+
+                }
+                else
+                {
+                    string swalScript = Swal.Fire("Usuario o Contraseña Incorrectas", "Inicio Invalido", SwalIcon.Error);
+
+                    ViewBag.SwalScript = swalScript;
+
+                    return View();
                 }
 
-                //ModelState.AddModelError(string.Empty, "Credenciales inválidas.");
-                TempData["ErrorMessage"] = "Credenciales inválidas.";
+                
             }
             return View(model);
         }

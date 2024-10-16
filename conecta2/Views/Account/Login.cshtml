@@ -40,6 +40,16 @@
         </form>
     </div>
 
+    @{
+    var swalScript = ViewBag.SwalScript as string;
+}
+
+@if (!string.IsNullOrEmpty(swalScript))
+{
+    @Html.Raw(swalScript)
+
+}
+
     <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

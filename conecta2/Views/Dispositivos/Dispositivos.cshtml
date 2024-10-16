@@ -49,31 +49,9 @@
 
 <div class="container mt-5 shadow-sm p-3 rounded">
     <div class="row justify-content-center">
-        <h2 class="text-center mb-4">Tercer Dispositivo</h2>
-        <div class="col-md-3">
-            <div class="card text-center border border-danger shadow-danger" style="cursor: pointer;" onclick="toggleFoco(3, false)">
-                <div class="card-body">
-                    <i class="bi bi-plug" style="font-size: 4rem;"></i>
-                    <h5 class="card-title mt-3">Apagado</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card text-center border" style="cursor: pointer;" onclick="toggleFoco(3, true)">
-                <div class="card-body">
-                    <i class="bi bi-plug-fill" style="font-size: 4rem;"></i>
-                    <h5 class="card-title mt-3">Encendido</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container mt-5 shadow-sm p-3 rounded">
-    <div class="row justify-content-center">
         <h2 class="text-center mb-4">Cuarto Dispositivo</h2>
         <div class="col-md-3">
-            <div class="card text-center border border-danger shadow-danger" style="cursor: pointer;" onclick="toggleFoco(4, false)">
+            <div class="card text-center border border-danger shadow-danger" style="cursor: pointer;"  id="btnApi1">
                 <div class="card-body">
                     <i class="bi bi-plug" style="font-size: 4rem;"></i>
                     <h5 class="card-title mt-3">Apagado</h5>
@@ -81,7 +59,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card text-center border" style="cursor: pointer;" onclick="toggleFoco(4, true)">
+            <div class="card text-center border" style="cursor: pointer;"  id="btnApi2">
                 <div class="card-body">
                     <i class="bi bi-plug-fill" style="font-size: 4rem;"></i>
                     <h5 class="card-title mt-3">Encendido</h5>
@@ -91,8 +69,50 @@
     </div>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
 
-<script>
+        // Evento del botón para consumir API 1
+        $('#btnApi1').click(function () {
+            $.ajax({
+                url: '@Url.Action("ConsumirApi1", "Dispositivos")',
+                type: 'GET',
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.message);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert("Error al intentar consumir API 1.");
+                }
+            });
+        });
+
+        // Evento del botón para consumir API 2
+        $('#btnApi2').click(function () {
+            $.ajax({
+                url: '@Url.Action("ConsumirApi2", "Dispositivos")',
+                type: 'GET',
+                success: function (response) {
+                    if (response.success) {
+                        alert(response.message);
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function () {
+                    alert("Error al intentar consumir API 2.");
+                }
+            });
+        });
+
+    });
+</script>
+
+@* <script>
     function toggleFoco(circuito, encender) {
         $.ajax({
             type: "POST",
@@ -118,7 +138,7 @@
             }
         });
     }
-</script>
+</script> *@
 
 <style>
     body {

@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Net;
+using System.Text;
 
 
 namespace conecta2.Controllers
@@ -30,62 +33,20 @@ namespace conecta2.Controllers
         [HttpPost]
         public async Task<JsonResult> ToggleFoco(int circuito, bool encender)
         {
-            string urlBase = "http://192.168.0.16/";
+            _httpClient.BaseAddress = new Uri("http://192.168.0.123:32772/");
 
-            if (circuito == 1)
-            {
-                if (encender)
-                {
-                    await _httpClient.GetAsync(urlBase + "LED1=ON");
-                    _circuitosEstado[1] = true;
-                }
-                else
-                {
-                    await _httpClient.GetAsync(urlBase + "LED1=OFF");
-                    _circuitosEstado[1] = false;
-                }
-            }
-            else if (circuito == 2)
-            {
-                if (encender)
-                {
-                    await _httpClient.GetAsync(urlBase + "LED2=ON");
-                    _circuitosEstado[2] = true;
-                }
-                else
-                {
-                    await _httpClient.GetAsync(urlBase + "LED2=OFF");
-                    _circuitosEstado[2] = false;
-                }
-            }
-            else if (circuito == 3)
-            {
-                if (encender)
-                {
-                    await _httpClient.GetAsync(urlBase + "LED3=ON");
-                    _circuitosEstado[3] = true;
-                }
-                else
-                {
-                    await _httpClient.GetAsync(urlBase + "LED3=OFF");
-                    _circuitosEstado[3] = false;
-                }
-            }
-            else if (circuito == 4)
-            {
-                if (encender)
-                {
-                    await _httpClient.GetAsync(urlBase + "LED4=ON");
-                    _circuitosEstado[4] = true;
-                }
-                else
-                {
-                    await _httpClient.GetAsync(urlBase + "LED4=OFF");
-                    _circuitosEstado[4] = false;
-                }
-            }
+            StringContent content = new StringContent(JsonConvert.SerializeObject(encender), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await _httpClient.PutAsync($"dispositivos/{circuito}", content);
+
+            response.EnsureSuccessStatusCode();
+
+            _circuitosEstado[1] = true;
+
+            _circuitosEstado[circuito] = encender;
 
             string mensaje = $"Circuito {circuito} {(encender ? "encendido" : "apagado")}.";
+
             return Json(new { message = mensaje });
         }
     }

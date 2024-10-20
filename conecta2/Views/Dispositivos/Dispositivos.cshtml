@@ -2,81 +2,164 @@
     Layout = "_Layout";
     ViewData["Title"] = "Mis Iconos";
 }
-
-<div class="container mt-5 shadow-sm p-3 rounded"">
-    <div class="row justify-content-center">
-        <h2 class="text-center mb-4">Primer Dispositivo</h2>
-        <div class="col-md-3">
-            <div class="card text-center border border-danger shadow-danger" style="cursor: pointer;" onclick="toggleFoco(1, false)">
-                <div class="card-body">
-                    <i class="bi bi-plug" style="font-size: 4rem;"></i>
-                    <h5 class="card-title mt-3">Apagado</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card text-center border" style="cursor: pointer;" onclick="toggleFoco(1, true)">
-                <div class="card-body">
-                    <i class="bi bi-plug-fill" style="font-size: 4rem;"></i>
-                    <h5 class="card-title mt-3">Encendido</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="container mt-5 shadow-sm p-3 rounded">
-    <div class="row justify-content-center">
-        <h2 class="text-center mb-4">Segundo Dispositivo</h2>
-        <div class="col-md-3">
-            <div class="card text-center border border-danger shadow-danger" style="cursor: pointer;" onclick="toggleFoco(2, false)">
+    <h2 class="text-center mb-4">Mis Dispositivos</h2>
+
+    <!-- Contenedor para el Dispositivo 1 -->
+    <div class="mb-4">
+        <h5 class="text-center">Dispositivo 1</h5>
+        <div class="d-flex justify-content-center mb-3">
+            <div class="card text-center border-danger me-2" style="cursor: pointer; width: 150px;" id="btnApi1" onclick="toggleFoco(1, false)">
                 <div class="card-body">
-                    <i class="bi bi-plug" style="font-size: 4rem;"></i>
-                    <h5 class="card-title mt-3">Apagado</h5>
+                    <i class="bi bi-plug" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Apagar</h5>
+                </div>
+            </div>
+            <div class="card text-center" style="cursor: pointer; width: 150px;" id="btnApi1On" onclick="toggleFoco(1, true)">
+                <div class="card-body">
+                    <i class="bi bi-plug-fill" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Encender</h5>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card text-center border" style="cursor: pointer;" onclick="toggleFoco(2, true)">
+        <div id="estado1" class="text-center">Estado: Apagado</div>
+    </div>
+
+    <!-- Contenedor para el Dispositivo 2 -->
+    <div class="mb-4">
+        <h5 class="text-center">Dispositivo 2</h5>
+        <div class="d-flex justify-content-center mb-3">
+            <div class="card text-center border-danger me-2" style="cursor: pointer; width: 150px;" id="btnApi2" onclick="toggleFoco(2, false)">
                 <div class="card-body">
-                    <i class="bi bi-plug-fill" style="font-size: 4rem;"></i>
-                    <h5 class="card-title mt-3">Encendido</h5>
+                    <i class="bi bi-plug" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Apagar</h5>
+                </div>
+            </div>
+            <div class="card text-center" style="cursor: pointer; width: 150px;" id="btnApi2On" onclick="toggleFoco(2, true)">
+                <div class="card-body">
+                    <i class="bi bi-plug-fill" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Encender</h5>
                 </div>
             </div>
         </div>
+        <div id="estado2" class="text-center">Estado: Apagado</div>
+    </div>
+
+    <!-- Contenedor para el Dispositivo 3 -->
+    <div class="mb-4">
+        <h5 class="text-center">Dispositivo 3</h5>
+        <div class="d-flex justify-content-center mb-3">
+            <div class="card text-center border-danger me-2" style="cursor: pointer; width: 150px;" id="btnApi3" onclick="toggleFoco(3, false)">
+                <div class="card-body">
+                    <i class="bi bi-plug" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Apagar</h5>
+                </div>
+            </div>
+            <div class="card text-center" style="cursor: pointer; width: 150px;" id="btnApi3On" onclick="toggleFoco(3, true)">
+                <div class="card-body">
+                    <i class="bi bi-plug-fill" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Encender</h5>
+                </div>
+            </div>
+        </div>
+        <div id="estado3" class="text-center">Estado: Apagado</div>
     </div>
 </div>
 
-<div class="container mt-5 shadow-sm p-3 rounded">
-    <div class="row justify-content-center">
-        <h2 class="text-center mb-4">Cuarto Dispositivo</h2>
-        <div class="col-md-3">
-            <div class="card text-center border border-danger shadow-danger" style="cursor: pointer;"  id="btnApi1">
-                <div class="card-body">
-                    <i class="bi bi-plug" style="font-size: 4rem;"></i>
-                    <h5 class="card-title mt-3">Apagado</h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card text-center border" style="cursor: pointer;"  id="btnApi2">
-                <div class="card-body">
-                    <i class="bi bi-plug-fill" style="font-size: 4rem;"></i>
-                    <h5 class="card-title mt-3">Encendido</h5>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript">
+
+
+<script>
+    async function toggleFoco(idDispositivo, encender) {
+        try {
+            const response = await fetch(`/Dispositivos/ToggleFoco?idDispositivo=${idDispositivo}&encender=${encender}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(encender)
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al cambiar el estado del foco: ' + response.statusText);
+            }
+
+            const result = await response.json();
+            console.log(result.message);
+
+            // Actualizar el estado visual del dispositivo
+            updateDeviceState(idDispositivo, encender);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    function updateDeviceState(idDispositivo, encender) {
+        const cardApagar = document.getElementById(`btnApi${idDispositivo}`);
+        const cardEncender = document.getElementById(`btnApi${idDispositivo}On`);
+        const estadoDiv = document.getElementById(`estado${idDispositivo}`);
+
+        if (!cardApagar || !cardEncender || !estadoDiv) {
+            console.error(`Elementos no encontrados para el ID: ${idDispositivo}`);
+            return; // Salir si no se encuentran los elementos
+        }
+
+        if (encender) {
+            cardApagar.classList.remove("border-danger");
+            cardEncender.classList.add("border-danger");
+            estadoDiv.textContent = "Estado: Encendido";  // Actualiza el texto del estado
+        } else {
+            cardApagar.classList.add("border-danger");
+            cardEncender.classList.remove("border-danger");
+            estadoDiv.textContent = "Estado: Apagado";  // Actualiza el texto del estado
+        }
+    }
+
+</script>
+
+@* 
+<script>
+    // Función para hacer la solicitud y cambiar el estado del foco
+    async function toggleFoco(idDispositivo, encender) {
+        try {
+            const response = await fetch(`/Dispositivos/ToggleFoco?idDispositivo=${idDispositivo}&encender=${encender}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(encender)
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al cambiar el estado del foco: ' + response.statusText);
+            }
+
+            const result = await response.json();
+            console.log(result.message);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    // Asignar los eventos a los botones
+    document.getElementById("btnApi1").addEventListener("click", function () {
+        toggleFoco(1, true);  // Llamada para apagar el foco (asumiendo idDispositivo = 1)
+    });
+
+    document.getElementById("btnApi2").addEventListener("click", function () {
+        toggleFoco(1, false);  // Llamada para encender el foco (asumiendo idDispositivo = 1)
+    });
+</script> *@
+
+
+
+@* <script type="text/javascript">
     $(document).ready(function () {
 
         // Evento del botón para consumir API 1
         $('#btnApi1').click(function () {
             $.ajax({
-                url: '@Url.Action("ConsumirApi1", "Dispositivos")',
+                url: '@Url.Action("ToggleFoco", "Dispositivos")',
                 type: 'GET',
                 success: function (response) {
                     if (response.success) {
@@ -94,7 +177,7 @@
         // Evento del botón para consumir API 2
         $('#btnApi2').click(function () {
             $.ajax({
-                url: '@Url.Action("ConsumirApi2", "Dispositivos")',
+                url: '@Url.Action("ToggleFoco", "Dispositivos")',
                 type: 'GET',
                 success: function (response) {
                     if (response.success) {
@@ -110,7 +193,7 @@
         });
 
     });
-</script>
+</script> *@
 
 @* <script>
     function toggleFoco(circuito, encender) {

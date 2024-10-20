@@ -17,16 +17,28 @@ namespace conecta2.Controllers
         [HttpPost]
         public async Task<JsonResult> ToggleFoco(int idDispositivo, bool encender)
         {
-            StringContent content = new StringContent(JsonConvert.SerializeObject(!encender), Encoding.UTF8, "application/json");
+            try
+            {
+                // Invertir el valor de encender
+                StringContent content = new StringContent(JsonConvert.SerializeObject(!encender), Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await client.PutAsync($"dispositivos/{idDispositivo}", content);
+                // Hacer la solicitud PUT a la API externa
+                HttpResponseMessage response = await client.PutAsync($"dispositivos/{idDispositivo}", content);
 
-            response.EnsureSuccessStatusCode();
+                // Asegurarse de que la solicitud haya sido exitosa
+                response.EnsureSuccessStatusCode();
 
-            string mensaje = $"Dispositivo: {idDispositivo} {(encender ? "encendido" : "apagado")}.";
-
-            return Json(new { message = mensaje });
+                // Crear mensaje de éxito
+                string mensaje = $"Dispositivo: {idDispositivo} {(encender ? "encendido" : "apagado")}.";
+                return Json(new { message = mensaje });
+            }
+            catch (Exception ex)
+            {
+                // Capturar y devolver el error como JSON para manejarlo en el frontend
+                return Json(new { error = true, message = ex.Message });
+            }
         }
+
 
         [HttpGet]
         public async Task<JsonResult> ObtenerFoco(int idDispositivo)
@@ -49,47 +61,6 @@ namespace conecta2.Controllers
                 return Json(new { message = "No se encontró el dispositivo" });
             }
         }
-
-        public async Task<IActionResult> ConsumirApi1()
-        {
-            try
-            {
-                // Ejemplo con una API real (https://jsonplaceholder.typicode.com/)
-                var response = await client.GetAsync("https://jsonplaceholder.typicode.com/posts");
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return Json(new { success = true, message = "API 1 consumida correctamente" });
-                }
-                else
-                {
-                    return Json(new { success = false, message = $"Error al consumir API 1. Código de estado: {response.StatusCode}" });
-                }
-            }
-            catch (Exception ex)
-            {
-                // Captura de errores generales
-                return Json(new { success = false, message = $"Excepción al consumir API 1: {ex.Message}" });
-            }
-        }
-
-        // Método para simular la API 2
-        public async Task<IActionResult> ConsumirApi2()
-        {
-            // Aquí simulas el consumo de una API ficticia
-            var response = await client.GetAsync("https://jsonplaceholder.typicode.com/posts"); // Ejemplo de API real
-
-            if (response.IsSuccessStatusCode)
-            {
-                return Json(new { success = true, message = "API 2 consumida correctamente" });
-            }
-            else
-            {
-                return Json(new { success = false, message = "Error al consumir API 2" });
-            }
-        }
-
-
 
 
         //// Estado del foco (true: encendido, false: apagado)

@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ESP8266.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Net.Http;
+using System.Text;
 
 
 namespace conecta2.Controllers
@@ -9,8 +12,44 @@ namespace conecta2.Controllers
     [Authorize]
     public class DispositivosController : Controller
     {
-        private static readonly HttpClient client = new HttpClient();
-        
+        private static readonly HttpClient client = new HttpClient() { BaseAddress = new Uri("http://192.168.1.123:32772/api/") };
+
+        [HttpPost]
+        public async Task<JsonResult> ToggleFoco(int idDispositivo, bool encender)
+        {
+            StringContent content = new StringContent(JsonConvert.SerializeObject(!encender), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PutAsync($"dispositivos/{idDispositivo}", content);
+
+            response.EnsureSuccessStatusCode();
+
+            string mensaje = $"Dispositivo: {idDispositivo} {(encender ? "encendido" : "apagado")}.";
+
+            return Json(new { message = mensaje });
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> ObtenerFoco(int idDispositivo)
+        {
+            HttpResponseMessage response = await client.GetAsync($"dispositivos/{idDispositivo}");
+            response.EnsureSuccessStatusCode();
+
+            string message = await response.Content.ReadAsStringAsync();
+
+            var foco = JsonConvert.DeserializeObject<Dispositivo>(message);
+
+            if (foco != null)
+            {
+                string mensaje = $"Dispositivo: {foco.IdDispositivo} {(foco.Estado ? "apagado" : "encendido")}.";
+
+                return Json(new { message = mensaje });
+            }
+            else
+            {
+                return Json(new { message = "No se encontró el dispositivo" });
+            }
+        }
+
         public async Task<IActionResult> ConsumirApi1()
         {
             try
@@ -71,68 +110,6 @@ namespace conecta2.Controllers
         {
             return View();
         }
-
-        //[HttpPost]
-        //public async Task<JsonResult> ToggleFoco(int circuito, bool encender)
-        //{
-        //    string urlBase = "http://192.168.0.16/";
-
-        //    if (circuito == 1)
-        //    {
-        //        if (encender)
-        //        {
-        //            await _httpClient.GetAsync(urlBase + "LED1=ON");
-        //            _circuitosEstado[1] = true;
-        //        }
-        //        else
-        //        {
-        //            await _httpClient.GetAsync(urlBase + "LED1=OFF");
-        //            _circuitosEstado[1] = false;
-        //        }
-        //    }
-        //    else if (circuito == 2)
-        //    {
-        //        if (encender)
-        //        {
-        //            await _httpClient.GetAsync(urlBase + "LED2=ON");
-        //            _circuitosEstado[2] = true;
-        //        }
-        //        else
-        //        {
-        //            await _httpClient.GetAsync(urlBase + "LED2=OFF");
-        //            _circuitosEstado[2] = false;
-        //        }
-        //    }
-        //    else if (circuito == 3)
-        //    {
-        //        if (encender)
-        //        {
-        //            await _httpClient.GetAsync(urlBase + "LED3=ON");
-        //            _circuitosEstado[3] = true;
-        //        }
-        //        else
-        //        {
-        //            await _httpClient.GetAsync(urlBase + "LED3=OFF");
-        //            _circuitosEstado[3] = false;
-        //        }
-        //    }
-        //    else if (circuito == 4)
-        //    {
-        //        if (encender)
-        //        {
-        //            await _httpClient.GetAsync(urlBase + "LED4=ON");
-        //            _circuitosEstado[4] = true;
-        //        }
-        //        else
-        //        {
-        //            await _httpClient.GetAsync(urlBase + "LED4=OFF");
-        //            _circuitosEstado[4] = false;
-        //        }
-        //    }
-
-        //    string mensaje = $"Circuito {circuito} {(encender ? "encendido" : "apagado")}.";
-        //    return Json(new { message = mensaje });
-        //}
     }
 }
 

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model conecta2.Controllers.DispositivosController.EstadoTierra
+@{
     Layout = "_Layout";
     ViewData["Title"] = "Mis Iconos";
 }
@@ -49,25 +50,102 @@
     <div class="mb-4">
         <h5 class="text-center">Dispositivo 3</h5>
         <div class="d-flex justify-content-center mb-3">
-            <div class="card text-center border-danger me-2" style="cursor: pointer; width: 150px;" id="btnApi3" onclick="toggleFoco(3, false)">
-                <div class="card-body">
-                    <i class="bi bi-plug" style="font-size: 3rem;"></i>
-                    <h5 class="card-title mt-3">Apagar</h5>
-                </div>
-            </div>
-            <div class="card text-center" style="cursor: pointer; width: 150px;" id="btnApi3On" onclick="toggleFoco(3, true)">
-                <div class="card-body">
-                    <i class="bi bi-plug-fill" style="font-size: 3rem;"></i>
-                    <h5 class="card-title mt-3">Encender</h5>
+            <div class="row">
+                <!-- Este div contendrá el estado dinámico del dispositivo -->
+                <div id="estadoTierra">
+                    <div class="col-md-12">
+                        <div class="card text-white bg-success mb-3">
+                            <div class="card-header">
+                                <i class="fas fa-tint"></i> Tierra Húmeda
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Estado: Húmedo</h5>
+                                <p class="card-text">La tierra está en buen estado, el nivel de humedad es óptimo.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="estado3" class="text-center">Estado: Apagado</div>
+    </div>
+    <div class="container mt-5">
+        <!-- Botones para cambiar el estado -->
+        <div class="row mb-3">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-success" onclick="cambiarEstado('Humeda')">Tierra Húmeda</button>
+                <button class="btn btn-warning" onclick="cambiarEstado('Seca')">Tierra Seca</button>
+                <button class="btn btn-danger" onclick="cambiarEstado('FueraDeLaTierra')">Fuera de la Tierra</button>
+            </div>
+        </div>
     </div>
 </div>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function cambiarEstado(estado) {
+        $.ajax({
+            url: '@Url.Action("ObtenerEstado", "Dispositivos")',
+            type: 'POST',
+            data: { estado: estado },
+            success: function (result) {
+                // Cambiar el estado dinámicamente según el valor devuelto por el controlador
+                actualizarEstadoTierra(result.estado);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error: " + error);
+            }
+        });
+    }
 
+    function actualizarEstadoTierra(estado) {
+        let estadoHtml = '';
+
+        if (estado === 'Humeda') {
+            estadoHtml = `
+                    <div class="col-md-12">
+                        <div class="card text-white bg-success mb-3">
+                            <div class="card-header">
+                                <i class="fas fa-tint"></i> Tierra Húmeda
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Estado: Húmedo</h5>
+                                <p class="card-text">La tierra está en buen estado, el nivel de humedad es óptimo.</p>
+                            </div>
+                        </div>
+                    </div>`;
+        } else if (estado === 'Seca') {
+            estadoHtml = `
+                    <div class="col-md-12">
+                        <div class="card text-white bg-warning mb-3">
+                            <div class="card-header">
+                                <i class="fas fa-sun"></i> Tierra Seca
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Estado: Seca</h5>
+                                <p class="card-text">La tierra necesita riego, el nivel de humedad es bajo.</p>
+                            </div>
+                        </div>
+                    </div>`;
+        } else if (estado === 'FueraDeLaTierra') {
+            estadoHtml = `
+                    <div class="col-md-12">
+                        <div class="card text-white bg-danger mb-3">
+                            <div class="card-header">
+                                <i class="fas fa-exclamation-triangle"></i> Fuera de la Tierra
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Estado: Crítico</h5>
+                                <p class="card-text">El sensor está fuera de la tierra o hay un error en el sistema.</p>
+                            </div>
+                        </div>
+                    </div>`;
+        }
+
+        // Actualizar el contenido del div con el nuevo estado
+        $('#estadoTierra').html(estadoHtml);
+    }
+</script>
 
 <script>
     async function toggleFoco(idDispositivo, encender) {

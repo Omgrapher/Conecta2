@@ -12,6 +12,19 @@ namespace conecta2.Controllers
     [Authorize]
     public class DispositivosController : Controller
     {
+        public enum EstadoTierra
+        {
+            Humeda,
+            Seca,
+            FueraDeLaTierra
+        }
+
+        [HttpPost]
+        public JsonResult ObtenerEstado(EstadoTierra estado)
+        {
+            // Devuelve el estado como JSON
+            return Json(new { estado = estado.ToString() });
+        }
         private static readonly HttpClient client = new HttpClient() { BaseAddress = new Uri("http://192.168.1.123:32772/api/") };
 
         [HttpPost]
@@ -61,22 +74,8 @@ namespace conecta2.Controllers
                 return Json(new { message = "No se encontró el dispositivo" });
             }
         }
-
-
-        //// Estado del foco (true: encendido, false: apagado)
-        //private static bool _isFocoEncendido = false;
-
-        //private HttpClient _httpClient = new();
-
-        //// Estado de los circuitos (true: encendido, false: apagado)
-        //private static Dictionary<int, bool> _circuitosEstado = new Dictionary<int, bool>
-        //{
-        //    { 1, false }, // Circuito 1 apagado
-        //    { 2, false }, // Circuito 2 apagado
-        //    { 3, false }, // Circuito 3 apagado
-        //    { 4, false }  // Circuito 4 apagado
-        //};
-
+        // Definir los posibles estados de la tierra
+        
         public IActionResult Dispositivos()
         {
             return View();

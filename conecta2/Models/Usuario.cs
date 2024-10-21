@@ -5,9 +5,9 @@ namespace ESP8266.Models;
 
 public partial class Usuario
 {
-    public int IdUsuario { get; set; }
+    public int id { get; set; }
 
-    public string Nombre { get; set; } = null!;
+    public string username { get; set; } = null!;
 
-    public string Clave { get; set; } = null!;
+    public string password { get; set; } = null!;
 }

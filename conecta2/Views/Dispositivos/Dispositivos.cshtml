@@ -47,12 +47,56 @@
     </div>
 
     <!-- Contenedor para el Dispositivo 3 -->
-    <div class="mb-4">
-        <h5 class="text-center">Dispositivo 3</h5>
+    <div class="container mt-5">
+        <div class="mb-4 text-center">
+            <h5>Dispositivo 3</h5>
+        </div>
+
+        <!-- Este div contendrá el estado dinámico del dispositivo (actualizado por JavaScript) -->
         <div class="d-flex justify-content-center mb-3">
             <div class="row">
-                <!-- Este div contendrá el estado dinámico del dispositivo -->
-                <div id="estadoTierra">
+                <div id="estadoTierra" class="col-md-12">
+                    <!-- El contenido dinámico del estado se cargará aquí por JavaScript -->
+                    <div class="card text-white bg-secondary mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-tint"></i> Consultando Estado...
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Estado: Cargando</h5>
+                            <p class="card-text">Obteniendo el estado actual del sensor de humedad.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+@* 
+<script>
+    async function obtenerEstadoHumedad(idDispositivo) {
+        try {
+            const response = await fetch(`/Dispositivos/ObtenerEstadoHumedad?idDispositivo=${idDispositivo}`);
+            if (!response.ok) {
+                throw new Error('Error al obtener el estado del sensor de humedad: ' + response.statusText);
+            }
+
+            const result = await response.json();
+            actualizarEstadoVisual(result.estado); // Llamada para actualizar la interfaz
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    function actualizarEstadoVisual(estado) {
+        const estadoDiv = document.getElementById("estadoTierra");
+
+        // Restablece el estilo inicial
+        estadoDiv.innerHTML = ""; // Limpia contenido previo
+        estadoDiv.className = ""; // Limpia clases previas
+
+        if (estado === 0) {
+            // Estado: Tierra Húmeda
+            estadoDiv.classList.add("bg-success", "text-white");
+            estadoDiv.innerHTML = `
                     <div class="col-md-12">
                         <div class="card text-white bg-success mb-3">
                             <div class="card-header">
@@ -64,88 +108,55 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container mt-5">
-        <!-- Botones para cambiar el estado -->
-        <div class="row mb-3">
-            <div class="col-md-12 text-center">
-                <button class="btn btn-success" onclick="cambiarEstado('Humeda')">Tierra Húmeda</button>
-                <button class="btn btn-warning" onclick="cambiarEstado('Seca')">Tierra Seca</button>
-                <button class="btn btn-danger" onclick="cambiarEstado('FueraDeLaTierra')">Fuera de la Tierra</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    function cambiarEstado(estado) {
-        $.ajax({
-            url: '@Url.Action("ObtenerEstado", "Dispositivos")',
-            type: 'POST',
-            data: { estado: estado },
-            success: function (result) {
-                // Cambiar el estado dinámicamente según el valor devuelto por el controlador
-                actualizarEstadoTierra(result.estado);
-            },
-            error: function (xhr, status, error) {
-                console.error("Error: " + error);
-            }
-        });
-    }
-
-    function actualizarEstadoTierra(estado) {
-        let estadoHtml = '';
-
-        if (estado === 'Humeda') {
-            estadoHtml = `
+                `;
+        } else if (estado === 1) {
+            // Estado: Tierra Seca
+            estadoDiv.classList.add("bg-warning", "text-dark");
+            estadoDiv.innerHTML = `
                     <div class="col-md-12">
-                        <div class="card text-white bg-success mb-3">
+                        <div class="card text-dark bg-warning mb-3">
                             <div class="card-header">
-                                <i class="fas fa-tint"></i> Tierra Húmeda
+                                <i class="fas fa-tint-slash"></i> Tierra Seca
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Estado: Húmedo</h5>
-                                <p class="card-text">La tierra está en buen estado, el nivel de humedad es óptimo.</p>
+                                <h5 class="card-title">Estado: Seco</h5>
+                                <p class="card-text">La tierra necesita agua, el nivel de humedad es bajo.</p>
                             </div>
                         </div>
-                    </div>`;
-        } else if (estado === 'Seca') {
-            estadoHtml = `
-                    <div class="col-md-12">
-                        <div class="card text-white bg-warning mb-3">
-                            <div class="card-header">
-                                <i class="fas fa-sun"></i> Tierra Seca
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Estado: Seca</h5>
-                                <p class="card-text">La tierra necesita riego, el nivel de humedad es bajo.</p>
-                            </div>
-                        </div>
-                    </div>`;
-        } else if (estado === 'FueraDeLaTierra') {
-            estadoHtml = `
+                    </div>
+                `;
+        } else if (estado === 2) {
+            // Estado: Fuera de la Tierra
+            estadoDiv.classList.add("bg-danger", "text-white");
+            estadoDiv.innerHTML = `
                     <div class="col-md-12">
                         <div class="card text-white bg-danger mb-3">
                             <div class="card-header">
-                                <i class="fas fa-exclamation-triangle"></i> Fuera de la Tierra
+                                <i class="fas fa-exclamation-triangle"></i> Sensor fuera de la tierra
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Estado: Crítico</h5>
-                                <p class="card-text">El sensor está fuera de la tierra o hay un error en el sistema.</p>
+                                <h5 class="card-title">Estado: Fuera de la Tierra</h5>
+                                <p class="card-text">El sensor no detecta humedad porque está fuera de la tierra.</p>
                             </div>
                         </div>
-                    </div>`;
+                    </div>
+                `;
         }
-
-        // Actualizar el contenido del div con el nuevo estado
-        $('#estadoTierra').html(estadoHtml);
     }
+
+    // Llamada inicial para cargar el estado al cargar la página
+    document.addEventListener("DOMContentLoaded", function () {
+        obtenerEstadoHumedad(3); // ID del dispositivo
+    });
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        setInterval(() => {
+            obtenerEstadoHumedad(3); // ID del dispositivo
+        }, 5000); // Consulta cada 5 segundos
+    });
+</script> *@
 
 <script>
     async function toggleFoco(idDispositivo, encender) {
@@ -171,135 +182,36 @@
             console.error(error);
         }
     }
+            function updateDeviceState(idDispositivo, encender) {
+                const cardApagar = document.getElementById(`btnApi${idDispositivo}`);
+                const cardEncender = document.getElementById(`btnApi${idDispositivo}On`);
+                const estadoDiv = document.getElementById(`estado${idDispositivo}`);
 
-    function updateDeviceState(idDispositivo, encender) {
-        const cardApagar = document.getElementById(`btnApi${idDispositivo}`);
-        const cardEncender = document.getElementById(`btnApi${idDispositivo}On`);
-        const estadoDiv = document.getElementById(`estado${idDispositivo}`);
+                if (!cardApagar || !cardEncender || !estadoDiv) {
+                    console.error(`Elementos no encontrados para el ID: ${idDispositivo}`);
+                    return; // Salir si no se encuentran los elementos
+                }
 
-        if (!cardApagar || !cardEncender || !estadoDiv) {
-            console.error(`Elementos no encontrados para el ID: ${idDispositivo}`);
-            return; // Salir si no se encuentran los elementos
-        }
+                // Limpiar clases de estilo en ambos botones
+                cardApagar.classList.remove("border-success", "shadow-success", "border-danger", "shadow-danger");
+                cardEncender.classList.remove("border-success", "shadow-success", "border-danger", "shadow-danger");
 
-        if (encender) {
-            cardApagar.classList.remove("border-danger");
-            cardEncender.classList.add("border-danger");
-            estadoDiv.textContent = "Estado: Encendido";  // Actualiza el texto del estado
-        } else {
-            cardApagar.classList.add("border-danger");
-            cardEncender.classList.remove("border-danger");
-            estadoDiv.textContent = "Estado: Apagado";  // Actualiza el texto del estado
-        }
-    }
-
+                // Actualizar el estado visual del dispositivo
+                if (encender) {
+                    // Encendido: Verde en botón de encender
+                    cardEncender.classList.add("border-success", "shadow-success"); // Encender en verde
+                    estadoDiv.textContent = "Estado: Encendido";
+                } else {
+                    // Apagado: Rojo en botón de apagar
+                    cardApagar.classList.add("border-danger", "shadow-danger");     // Apagar en rojo
+                    estadoDiv.textContent = "Estado: Apagado";
+                }
+            }
 </script>
 
-@* 
-<script>
-    // Función para hacer la solicitud y cambiar el estado del foco
-    async function toggleFoco(idDispositivo, encender) {
-        try {
-            const response = await fetch(`/Dispositivos/ToggleFoco?idDispositivo=${idDispositivo}&encender=${encender}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(encender)
-            });
-
-            if (!response.ok) {
-                throw new Error('Error al cambiar el estado del foco: ' + response.statusText);
-            }
-
-            const result = await response.json();
-            console.log(result.message);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    // Asignar los eventos a los botones
-    document.getElementById("btnApi1").addEventListener("click", function () {
-        toggleFoco(1, true);  // Llamada para apagar el foco (asumiendo idDispositivo = 1)
-    });
-
-    document.getElementById("btnApi2").addEventListener("click", function () {
-        toggleFoco(1, false);  // Llamada para encender el foco (asumiendo idDispositivo = 1)
-    });
-</script> *@
 
 
 
-@* <script type="text/javascript">
-    $(document).ready(function () {
-
-        // Evento del botón para consumir API 1
-        $('#btnApi1').click(function () {
-            $.ajax({
-                url: '@Url.Action("ToggleFoco", "Dispositivos")',
-                type: 'GET',
-                success: function (response) {
-                    if (response.success) {
-                        alert(response.message);
-                    } else {
-                        alert(response.message);
-                    }
-                },
-                error: function () {
-                    alert("Error al intentar consumir API 1.");
-                }
-            });
-        });
-
-        // Evento del botón para consumir API 2
-        $('#btnApi2').click(function () {
-            $.ajax({
-                url: '@Url.Action("ToggleFoco", "Dispositivos")',
-                type: 'GET',
-                success: function (response) {
-                    if (response.success) {
-                        alert(response.message);
-                    } else {
-                        alert(response.message);
-                    }
-                },
-                error: function () {
-                    alert("Error al intentar consumir API 2.");
-                }
-            });
-        });
-
-    });
-</script> *@
-
-@* <script>
-    function toggleFoco(circuito, encender) {
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("ToggleFoco", "Dispositivos")',
-            data: { circuito: circuito, encender: encender },
-            success: function (response) {
-                alert(response.message); // Muestra el mensaje del servidor
-                changeBorder(circuito, encender); // Cambia el borde según el estado
-            }
-        });
-    }
-
-    function changeBorder(circuito, encender) {
-        const cards = document.querySelectorAll('.card');
-        cards.forEach((c, index) => {
-            if (index === (circuito - 1) * 2 || index === (circuito - 1) * 2 + 1) {
-                c.classList.remove('border-success', 'shadow-success', 'border-danger', 'shadow-danger');
-                if (encender) {
-                    c.classList.add('border-success', 'shadow-success'); // Encendido
-                } else {
-                    c.classList.add('border-danger', 'shadow-danger');   // Apagado
-                }
-            }
-        });
-    }
-</script> *@
 
 <style>
     body {

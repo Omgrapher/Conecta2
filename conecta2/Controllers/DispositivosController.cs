@@ -14,16 +14,21 @@ namespace conecta2.Controllers
     {
         public enum EstadoTierra
         {
-            Humeda,
-            Seca,
-            FueraDeLaTierra
+            Humeda = 0,
+            Seca = 1,
+            FueraDeLaTierra = 2
         }
 
-        [HttpPost]
-        public JsonResult ObtenerEstado(EstadoTierra estado)
+        [HttpGet]
+        public async Task<JsonResult> ObtenerEstadoHumedad(int idDispositivo)
         {
-            // Devuelve el estado como JSON
-            return Json(new { estado = estado.ToString() });
+            HttpResponseMessage response = await client.GetAsync($"dispositivos/{idDispositivo}/estado");
+            response.EnsureSuccessStatusCode();
+
+            string estadoStr = await response.Content.ReadAsStringAsync();
+            int estado = int.Parse(estadoStr); // Convierte el estado a entero
+
+            return Json(new { estado = estado });
         }
         private static readonly HttpClient client = new HttpClient() { BaseAddress = new Uri("http://192.168.1.123:32772/api/") };
 

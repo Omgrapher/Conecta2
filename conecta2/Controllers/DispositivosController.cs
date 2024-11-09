@@ -14,8 +14,8 @@ namespace conecta2.Controllers
     {
         public enum EstadoTierra
         {
-            Humeda = 0,
-            Seca = 1,
+            Seca = 0,
+            Humeda = 1,
             FueraDeLaTierra = 2
         }
 

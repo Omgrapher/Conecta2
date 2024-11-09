@@ -6,19 +6,18 @@
 <div class="container mt-5 shadow-sm p-3 rounded">
     <h2 class="text-center mb-4">Mis Dispositivos</h2>
 
-    <!-- Contenedor para el Dispositivo 1 -->
     <div class="mb-4">
         <h5 class="text-center">Dispositivo 1</h5>
         <div class="d-flex justify-content-center mb-3">
             <div class="card text-center border-danger me-2" style="cursor: pointer; width: 150px;" id="btnApi1" onclick="toggleFoco(1, false)">
                 <div class="card-body">
-                    <i class="bi bi-plug" style="font-size: 3rem;"></i>
+                    <i class="bi bi-lightbulb" style="font-size: 3rem;"></i>
                     <h5 class="card-title mt-3">Apagar</h5>
                 </div>
             </div>
             <div class="card text-center" style="cursor: pointer; width: 150px;" id="btnApi1On" onclick="toggleFoco(1, true)">
                 <div class="card-body">
-                    <i class="bi bi-plug-fill" style="font-size: 3rem;"></i>
+                    <i class="bi bi-lightbulb-fill" style="font-size: 3rem;"></i>
                     <h5 class="card-title mt-3">Encender</h5>
                 </div>
             </div>
@@ -26,19 +25,18 @@
         <div id="estado1" class="text-center">Estado: Apagado</div>
     </div>
 
-    <!-- Contenedor para el Dispositivo 2 -->
     <div class="mb-4">
         <h5 class="text-center">Dispositivo 2</h5>
         <div class="d-flex justify-content-center mb-3">
             <div class="card text-center border-danger me-2" style="cursor: pointer; width: 150px;" id="btnApi2" onclick="toggleFoco(2, false)">
                 <div class="card-body">
-                    <i class="bi bi-plug" style="font-size: 3rem;"></i>
+                    <i class="bi bi-lightbulb" style="font-size: 3rem;"></i>
                     <h5 class="card-title mt-3">Apagar</h5>
                 </div>
             </div>
             <div class="card text-center" style="cursor: pointer; width: 150px;" id="btnApi2On" onclick="toggleFoco(2, true)">
                 <div class="card-body">
-                    <i class="bi bi-plug-fill" style="font-size: 3rem;"></i>
+                    <i class="bi bi-lightbulb-fill" style="font-size: 3rem;"></i>
                     <h5 class="card-title mt-3">Encender</h5>
                 </div>
             </div>
@@ -46,10 +44,48 @@
         <div id="estado2" class="text-center">Estado: Apagado</div>
     </div>
 
-    <!-- Contenedor para el Dispositivo 3 -->
+    <div class="mb-4">
+        <h5 class="text-center">Dispositivo 3</h5>
+        <div class="d-flex justify-content-center mb-3">
+            <div class="card text-center border-danger me-2" style="cursor: pointer; width: 150px;" id="btnApi2" onclick="toggleFoco(3, false)">
+                <div class="card-body">
+                    <i class="bi bi-plug" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Apagar</h5>
+                </div>
+            </div>
+            <div class="card text-center" style="cursor: pointer; width: 150px;" id="btnApi2On" onclick="toggleFoco(3, true)">
+                <div class="card-body">
+                    <i class="bi bi-plug-fill" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Encender</h5>
+                </div>
+            </div>
+        </div>
+        <div id="estado3" class="text-center">Estado: Apagado</div>
+    </div>
+
+    <div class="mb-4">
+        <h5 class="text-center">Dispositivo 4</h5>
+        <div class="d-flex justify-content-center mb-3">
+            <div class="card text-center border-danger me-2" style="cursor: pointer; width: 150px;" id="btnApi2" onclick="toggleFoco(3, false)">
+                <div class="card-body">
+                    <i class="bi bi-arrow-up" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Subir</h5>
+                </div>
+            </div>
+            <div class="card text-center" style="cursor: pointer; width: 150px;" id="btnApi2On" onclick="toggleFoco(3, true)">
+                <div class="card-body">
+                    <i class="bi bi-arrow-down" style="font-size: 3rem;"></i>
+                    <h5 class="card-title mt-3">Bajar</h5>
+                </div>
+            </div>
+        </div>
+        <div id="estado4" class="text-center">Estado: Apagado</div>
+    </div>
+
+    <!-- Contenedor para el Dispositivo 5 -->
     <div class="container mt-5">
         <div class="mb-4 text-center">
-            <h5>Dispositivo 3</h5>
+            <h5>Dispositivo 5</h5>
         </div>
 
         <!-- Este div contendrá el estado dinámico del dispositivo (actualizado por JavaScript) -->
@@ -69,6 +105,8 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
 @* 
 <script>

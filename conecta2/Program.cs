@@ -8,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Agregar servicios al contenedor.
 builder.Services.AddControllersWithViews();
 
+// Agregar HttpClient al contenedor de dependencias
+builder.Services.AddHttpClient();
+
 // Configurar la autenticación con cookies.
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -16,22 +19,22 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/Account/Login";
     });
 
+// Configuración de DbContext para usar SQL Server
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))); // Usa el IConfiguration para obtener la cadena de conexión
 
 var app = builder.Build();
-
- 
 
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRouting(); 
+app.UseRouting();
 
 // Configurar el middleware de autenticación y autorización.
 app.UseAuthentication(); // Habilita la autenticación
@@ -50,4 +53,5 @@ app.UseEndpoints(endpoints =>
         pattern: "Dispositivos/{action=Dispositivos}/{id?}",
         defaults: new { controller = "Dispositivos" });
 });
+
 app.Run();

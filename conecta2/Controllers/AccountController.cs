@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using conecta2.Util;
 using System.Reflection.Metadata;
 using conecta2.BD;
+using ESP8266.Models;
 
 namespace conecta2.Controllers
 {
@@ -14,11 +15,15 @@ namespace conecta2.Controllers
     public class AccountController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly HttpClient _httpClient;
 
-        public AccountController(ApplicationDbContext context)
+        public AccountController(ApplicationDbContext context, HttpClient httpClient)
         {
             _context = context;
+            _httpClient = httpClient;
+            _httpClient.BaseAddress = new Uri("http://192.168.1.123:32772/api/"); // URL de la API de tu compañero
         }
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -27,19 +32,23 @@ namespace conecta2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var usuario = _context.Usuarios
-                    .FirstOrDefault(u => u.username == model.Username && u.password == model.Password);
+                // Realiza la solicitud GET a la API del compañero para verificar credenciales
+                var response = await _httpClient.GetAsync($"usuarios?nombre={model.Username}&clave={model.Password}");
 
-                if (usuario != null)
+                if (response.IsSuccessStatusCode)
                 {
-                    var claims = new List<Claim>
+                    var usuario = await response.Content.ReadFromJsonAsync<Usuario>();
+
+                    if (usuario != null)
                     {
-                       new Claim(ClaimTypes.Name, model.Username)
-                    };
+                        var claims = new List<Claim>
+                        {
+                           new Claim(ClaimTypes.Name, model.Username)
+                        };
 
                         var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                         var authProperties = new AuthenticationProperties
@@ -47,29 +56,24 @@ namespace conecta2.Controllers
                             IsPersistent = true // La cookie será persistente (no se elimina al cerrar el navegador)
                         };
 
-                        HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties).Wait();
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
 
+                        // Genera el script de éxito usando Swal sin cambiar la implementación
                         string redirectUrl = Url.Action("HomePage", "Home");
-
                         string swalScript = Swal.Fire("Inicio de Sesión Correcto", "Bienvenido", SwalIcon.Success, redirectUrl);
-
-                        ViewBag.SwalScript = swalScript;
-
-                        return View();
-
-
-                    }
-                    else
-                    {
-                        string swalScript = Swal.Fire("Usuario o Contraseña Incorrectas", "Inicio Invalido", SwalIcon.Error);
-
                         ViewBag.SwalScript = swalScript;
 
                         return View();
                     }
+                }
 
-                
+                // Si el usuario no fue encontrado o hubo error en las credenciales, se muestra Swal con error
+                string swalScriptError = Swal.Fire("Usuario o Contraseña Incorrectas", "Inicio Invalido", SwalIcon.Error);
+                ViewBag.SwalScript = swalScriptError;
+
+                return View();
             }
+
             return View(model);
         }
 
